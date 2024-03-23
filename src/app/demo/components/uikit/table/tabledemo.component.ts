@@ -5,6 +5,7 @@ import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { LexerTokenType } from '@angular/compiler';
 
 interface expandedRows {
     [key: string]: boolean;
@@ -56,9 +57,11 @@ export class TableDemoComponent implements OnInit {
             // @ts-ignore
             this.customers1.forEach(customer => customer.date = new Date(customer.date));
         });
+        this.customerService.getMatches();
         this.customerService.getCustomersMedium().then(customers => this.customers2 = customers);
         this.customerService.getCustomersLarge().then(customers => this.customers3 = customers);
         this.productService.getProductsWithOrdersSmall().then(data => this.products = data);
+
 
         this.representatives = [
             { name: 'Amy Elsner', image: 'amyelsner.png' },
